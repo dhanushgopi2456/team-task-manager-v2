@@ -1,239 +1,661 @@
-# TEAM TASK MANAGER
+# 🚀 TEAM TASK MANAGER
 
-> **Smart Teamwork. Clear Tasks. Better Results.**
+<p align="center">
 
-A production-quality **Ultra-3D 2026 full-stack team productivity platform** — projects,
-kanban drag & drop, calendar, analytics, notifications and strict role-based access control
-(Admin / Team Lead / Regular Member).
+### **Smart Teamwork. Clear Tasks. Better Results.**
 
-Built with **React 18 + Vite + TypeScript + Tailwind CSS** on the front, and
-**Node.js + Express + TypeScript + MongoDB (Mongoose)** on the back.
+**A production-quality Ultra-3D team productivity platform built for modern engineering teams.**
 
----
+<br/>
 
-## ✨ Features
+<img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&pause=1000&color=6366F1&center=true&vCenter=true&width=850&lines=Manage+Projects+%F0%9F%93%81;Track+Tasks+%E2%9C%85;Collaborate+with+Teams+%F0%9F%91%A5;Visualize+Productivity+%F0%9F%93%8A;Ship+Better+Work+%F0%9F%9A%80" />
 
-| Area | Highlights |
-|---|---|
-| 🔐 **Auth** | Single secure login for all roles · JWT (httpOnly cookie + Bearer) · bcrypt hashing · register / forgot / reset / change password · session tracking & remote logout |
-| 👥 **RBAC** | `admin`, `member` + `memberType: team_lead | regular_member` — enforced by middleware that reloads the user from the DB on every request; client role data is never trusted |
-| 📊 **Dashboard** | Animated greeting hero, productivity score dial, 6 animated KPI cards, weekly productivity chart, due-today list, live activity timeline |
-| 📁 **Projects** | Floating glass gallery with progress, deadlines, member avatars, overdue counters · create/edit/archive/delete (admin) · add/remove members (admin + project leads) |
-| 🗂️ **Project workspace** | Tabs: Overview · Tasks · Kanban · Team · Activity · Files · Timeline |
-| 🧲 **Kanban** | dnd-kit drag & drop with rising card, drag overlay, optimistic updates and instant persistence (`TO DO → IN PROGRESS → REVIEW → COMPLETED`) |
-| ✅ **Tasks** | Statuses, priorities, assignees, due dates, tags, comments with mentions, attachments, activity history |
-| 📅 **Calendar** | Day / Week / Month views of task deadlines; click any day to drill in |
-| 🔔 **Notifications** | Floating bell center + full page; assignments, status changes, comments, mentions, deadlines, security events |
-| 📈 **Reports** | Completion rate, status distribution, completion trend, per-project progress, workload & member performance tables, date-range filtering |
-| 🛡️ **Admin suite** | Admin Dashboard (system overview viz) · User Management (create / edit / delete / activate / reset password / assign roles) · Permission Matrix · Audit Logs (searchable, filterable) · System Settings |
-| 🎨 **Ultra-3D design** | Glassmorphism, layered depth shadows, ambient orbs + particles background, raised sidebar pills, hover elevation, Framer Motion micro-interactions, reduced-motion support |
+</p>
 
----
+<p align="center">
 
-## 🚀 Quick start
+<img src="https://img.shields.io/badge/React-18-61DAFB?style=for-the-badge&logo=react&logoColor=white"/>
+<img src="https://img.shields.io/badge/Vite-5-646CFF?style=for-the-badge&logo=vite&logoColor=white"/>
+<img src="https://img.shields.io/badge/TypeScript-5-3178C6?style=for-the-badge&logo=typescript&logoColor=white"/>
+<img src="https://img.shields.io/badge/Tailwind-CSS-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white"/>
 
-```bash
-# 1. Install everything
-npm install            # root (concurrently)
-npm run install:all    # server + client deps
+</p>
 
-# 2. Run dev (API on :5000, web on :5173)
-npm run dev
+<p align="center">
 
-# The API auto-starts an in-memory MongoDB and seeds demo data on first boot.
-# Open http://localhost:5173
-```
+<img src="https://img.shields.io/badge/Node.js-20+-339933?style=for-the-badge&logo=node.js&logoColor=white"/>
+<img src="https://img.shields.io/badge/Express.js-API-000000?style=for-the-badge&logo=express&logoColor=white"/>
+<img src="https://img.shields.io/badge/MongoDB-Mongoose-47A248?style=for-the-badge&logo=mongodb&logoColor=white"/>
+<img src="https://img.shields.io/badge/JWT-Authentication-orange?style=for-the-badge&logo=jsonwebtokens&logoColor=white"/>
 
-### Demo accounts (seeded automatically)
-
-| Role | Email | Password |
-|---|---|---|
-| **ADMIN** | `admin@example.com` | `Admin@123` |
-| **TEAM LEAD** | `john@example.com` | `John@1234` |
-| **TEAM LEAD** | `priya@example.com` | `Priya@1234` |
-| **REGULAR MEMBER** | `alex@example.com` | `Alex@1234` |
-| **REGULAR MEMBER** | `rahul@example.com` / `sara@example.com` | `Rahul@1234` / `Sara@1234` |
-
-Sample data includes **FreshMart E-Commerce**, **AI Analytics Dashboard**, **Mobile Banking App**
-and **Company Portfolio**, with 25 tasks across all statuses, comments, notifications,
-activity entries and audit events.
+</p>
 
 ---
 
-## 🧑‍💻 Running the project in VS Code (step by step)
+## 🌟 What Is Team Task Manager?
 
-### Prerequisites
+**Team Task Manager** is a full-stack productivity platform designed to help teams organize projects, manage tasks, collaborate efficiently, and understand their productivity through real-time dashboards and analytics.
 
-| Tool | Version | Check with |
-|---|---|---|
-| [Node.js](https://nodejs.org) | **18+** (20 LTS recommended) | `node --version` |
-| npm | 9+ (ships with Node) | `npm --version` |
-| [Visual Studio Code](https://code.visualstudio.com) | latest | — |
-| MongoDB | *optional* — a free in-memory demo DB starts automatically | `mongod --version` |
+It combines:
 
-> 💡 On Windows, install Node from nodejs.org and run everything from **PowerShell**, or use
-> **WSL + VS Code Remote** for the smoothest experience.
+**📁 Project Management + 🗂️ Kanban + 👥 Team Collaboration + 📅 Planning + 📊 Analytics + 🔐 RBAC + 🎨 Ultra-3D UI**
 
-### Step 1 — Open the project
-
-1. Unzip / copy the project anywhere, e.g. `C:\projects\team-task-manager`.
-2. Launch **VS Code** → `File ▸ Open Folder…` → select the `team-task-manager` root folder.
-3. When prompted *"Install recommended extensions?"* click **Install** (Tailwind IntelliSense,
-   ESLint, Prettier, MongoDB viewer). You can also install manually:
-   ```bash
-   code --install-extension bradlc.vscode-tailwindcss
-   code --install-extension dbaeumer.vscode-eslint
-   code --install-extension esbenp.prettier-vscode
-   code --install-extension mongodb.mongodb-vscode
-   ```
-
-### Step 2 — Open the integrated terminal
-
-```
-Terminal ▸ New Terminal   (shortcut: Ctrl + `)
-```
-
-The terminal opens at the project root (`team-task-manager/`).
-
-### Step 3 — Install dependencies
-
-```bash
-npm install          # installs concurrently at the root
-npm run install:all  # installs server/ and client/ dependencies
-```
-
-### Step 4 — (Optional) configure environment
-
-```bash
-cd server
-cp .env.example .env   # Windows PowerShell: Copy-Item .env.example .env
-```
-
-Leave `MONGO_URI=` empty to use the automatic in-memory demo database,
-or point it at your own cluster (`mongodb://localhost:27017` / Atlas URI).
-Set a strong `JWT_SECRET` before any real deployment.
-
-### Step 5 — Start the app 🚀
-
-Pick **one** of these options:
-
-**Option A · one command (recommended)**
-
-```bash
-# from the project root
-npm run dev
-```
-
-This runs both processes concurrently:
-
-- 🔌 API server → http://localhost:5000/api
-- 🌐 Web app  → http://localhost:5173 *(opens automatically — Ctrl+Click the link in the terminal)*
-
-**Option B · VS Code debugger**
-
-Press `F5` (or go to *Run and Debug* panel). Three launch profiles are pre-configured in `.vscode/launch.json`:
-
-- **🚀 Full Stack (API + Web)** — one click, both servers
-- **▶ API Server (server/)** — API only, with breakpoints & debugging
-- **🌐 Web (client/ — Vite)** — client only, auto-opens the browser
-
-**Option C · two terminals (full control)**
-
-```bash
-# Terminal 1 — backend
-cd server
-npm run dev
-
-# Terminal 2 — frontend
-cd client
-npm run dev
-```
-
-### Step 6 — Sign in
-
-Open **http://localhost:5173** and log in with any seeded account (see table above).
-The first boot auto-seeds demo data; subsequent restarts keep whatever you created.
-
-### Useful commands while developing
-
-```bash
-npm run seed        # reset the database to pristine demo data (from root)
-npm run build       # production build: server (tsc) + client (vite)
-npm start           # run the compiled production API
-```
-
-### Troubleshooting
-
-| Problem | Fix |
-|---|---|
-| Port `5000`/`5173` already in use | Kill the process using it, or change `PORT` in `server/.env` / `client/vite.config.ts` |
-| First boot is slow | The in-memory MongoDB binary (~80 MB) downloads once, then is cached |
-| `EADDRINUSE` after a crash | `npx kill-port 5000 5173` or close stray node processes |
-| Login returns *Invalid email or password* | Run `npm run seed`, then use the exact demo credentials above |
+into one unified workspace.
 
 ---
 
-### Using your own MongoDB
+## ⚡ Everything Your Team Needs
 
-```bash
-cd server
-cp .env.example .env
-# set MONGO_URI=mongodb+srv://… or mongodb://localhost:27017
+```text
+                         🚀 TEAM TASK MANAGER
+                                  │
+          ┌───────────────────────┼───────────────────────┐
+          │                       │                       │
+          ▼                       ▼                       ▼
+     📁 PROJECTS              ✅ TASKS                👥 TEAMS
+          │                       │                       │
+          ▼                       ▼                       ▼
+      Deadlines               Kanban                 Members
+      Progress                Priorities              Roles
+      Members                 Assignees               Activity
+          │                       │                       │
+          └───────────────────────┼───────────────────────┘
+                                  ▼
+                         📊 PRODUCTIVITY
+                                  │
+                  ┌───────────────┼───────────────┐
+                  ▼               ▼               ▼
+             📈 Analytics     📅 Calendar      🔔 Alerts
+                  │               │               │
+                  └───────────────┼───────────────┘
+                                  ▼
+                           🎯 BETTER RESULTS
 ```
-
-With a real `MONGO_URI` the app connects there instead (and still auto-seeds if empty).
-Run `npm run seed` anytime to reset demo data.
 
 ---
 
-## 🏗️ Architecture
+# ✨ Feature Showcase
+
+| 🚀 Module                 | What You Get                                                                 |
+| ------------------------- | ---------------------------------------------------------------------------- |
+| 🔐 **Authentication**     | JWT, httpOnly cookies, Bearer tokens, password recovery and session tracking |
+| 🛡️ **Role-Based Access** | Admin, Team Lead and Regular Member permissions                              |
+| 📊 **Smart Dashboard**    | Productivity score, KPIs, charts, deadlines and live activity                |
+| 📁 **Project Management** | Create, edit, archive, delete and manage project members                     |
+| 🗂️ **Kanban Board**      | Drag & drop workflow with optimistic updates                                 |
+| ✅ **Task Management**     | Status, priority, assignee, tags, due dates and comments                     |
+| 📅 **Calendar**           | Day, week and month task views                                               |
+| 🔔 **Notifications**      | Assignments, mentions, comments, deadlines and security alerts               |
+| 📈 **Reports**            | Completion rate, trends, workload and member performance                     |
+| 👑 **Admin Suite**        | Users, permissions, audit logs, settings and system analytics                |
+| 🎨 **Ultra-3D UI**        | Glassmorphism, particles, depth, motion and interactive effects              |
+
+---
+
+# 🎯 Built Around Team Workflow
+
+```text
+📝 CREATE PROJECT
+       │
+       ▼
+👥 ADD TEAM MEMBERS
+       │
+       ▼
+✅ CREATE TASKS
+       │
+       ▼
+🧲 MOVE THROUGH KANBAN
+       │
+       ├── 📝 TO DO
+       │
+       ├── 🔵 IN PROGRESS
+       │
+       ├── 🟣 REVIEW
+       │
+       └── 🟢 COMPLETED
+       │
+       ▼
+📊 TRACK PROGRESS
+       │
+       ▼
+🎯 ANALYZE PERFORMANCE
+```
+
+---
+
+# 🧲 Kanban Experience
+
+The Kanban board is built around **dnd-kit** and provides a smooth drag-and-drop workflow.
+
+```text
+┌────────────┐   ┌────────────┐   ┌────────────┐   ┌────────────┐
+│ 📝 TO DO   │ → │ 🔵 ACTIVE  │ → │ 🟣 REVIEW  │ → │ 🟢 DONE    │
+├────────────┤   ├────────────┤   ├────────────┤   ├────────────┤
+│ Task #01   │   │ Task #04   │   │ Task #07   │   │ Task #09   │
+│ Task #02   │   │ Task #05   │   │ Task #08   │   │ Task #10   │
+│ Task #03   │   │ Task #06   │   │            │   │            │
+└────────────┘   └────────────┘   └────────────┘   └────────────┘
+```
+
+### ⚡ Interaction Highlights
+
+* 🧲 Drag & drop
+* ✨ Lifted card animation
+* 🎯 Drag overlay
+* ⚡ Optimistic UI updates
+* 💾 Instant persistence
+* 🔄 Automatic status synchronization
+
+---
+
+# 👥 Role-Based Access Control
+
+Security isn't only handled in the UI.
+
+```text
+                    👤 USER
+                      │
+                      ▼
+                 🔑 JWT AUTH
+                      │
+                      ▼
+              🛡️ PROTECT MIDDLEWARE
+                      │
+                      ▼
+                👤 LOAD USER
+                      │
+          ┌───────────┼───────────┐
+          ▼           ▼           ▼
+       👑 ADMIN    🎯 LEAD     👤 MEMBER
+          │           │           │
+          ▼           ▼           ▼
+       Full       Project      Assigned
+       Access     Control      Access
+```
+
+The API reloads the user from the database for each request instead of trusting client-side role information.
+
+That means hiding a button in the frontend **does not equal authorization**.
+
+The backend remains the source of truth.
+
+---
+
+# 📊 Productivity Dashboard
+
+The dashboard transforms raw task activity into an easy-to-understand productivity overview.
+
+### 📈 Dashboard Components
+
+* 🎯 Productivity score
+* 📊 Animated KPI cards
+* 📈 Weekly productivity chart
+* ⏰ Due-today tasks
+* 🟢 Live activity timeline
+* 📁 Project progress
+* 👥 Team activity
+
+```text
+                 📊 PRODUCTIVITY DASHBOARD
+
+        ┌──────────┐ ┌──────────┐ ┌──────────┐
+        │ 🎯 87%   │ │ ✅ 124   │ │ ⏰ 08    │
+        │ Score    │ │ Complete │ │ Due      │
+        └──────────┘ └──────────┘ └──────────┘
+
+        ┌────────────────────────────────────┐
+        │        📈 WEEKLY PRODUCTIVITY      │
+        │                                    │
+        │      ╭──╮                          │
+        │   ╭──╯  ╰──╮     ╭──╮             │
+        │ ╭─╯         ╰─────╯  ╰──           │
+        │                                    │
+        └────────────────────────────────────┘
+```
+
+---
+
+# 📁 Project Workspace
+
+Each project acts as a complete collaborative workspace.
+
+```text
+📁 PROJECT
+│
+├── 🏠 Overview
+├── ✅ Tasks
+├── 🧲 Kanban
+├── 👥 Team
+├── 🔔 Activity
+├── 📎 Files
+└── 🗓️ Timeline
+```
+
+Everything related to a project stays in one place.
+
+---
+
+# 📅 Calendar + Planning
+
+Task deadlines can be visualized across:
+
+**☀️ Day → 📆 Week → 🗓️ Month**
+
+Click any date to drill into the tasks scheduled for that day.
+
+This provides teams with both:
+
+* 🧲 Workflow-based planning through Kanban
+* 📅 Time-based planning through Calendar
+
+---
+
+# 🔔 Real-Time Team Awareness
+
+The notification system keeps users informed about important activity.
+
+### Notifications include:
+
+* 👤 Task assignments
+* 🔄 Status changes
+* 💬 Comments
+* @️⃣ Mentions
+* ⏰ Upcoming deadlines
+* 🔐 Security events
+
+```text
+🔔 NOTIFICATION CENTER
+
+👤 John assigned you "API Integration"
+                         2 min ago
+
+💬 Priya mentioned you in "Dashboard UI"
+                         8 min ago
+
+⏰ "Payment Module" is due tomorrow
+                         1 hr ago
+```
+
+---
+
+# 📈 Reports & Analytics
+
+Turn team activity into measurable insights.
+
+### 📊 Reports Include
+
+```text
+┌─────────────────────────────────────────┐
+│ 📈 COMPLETION RATE                      │
+├─────────────────────────────────────────┤
+│ ████████████████████░░░░ 82%            │
+└─────────────────────────────────────────┘
+
+┌─────────────────────────────────────────┐
+│ 📊 STATUS DISTRIBUTION                  │
+├─────────────────────────────────────────┤
+│ 📝 To Do          24                    │
+│ 🔵 In Progress    18                    │
+│ 🟣 Review         11                    │
+│ 🟢 Completed      57                    │
+└─────────────────────────────────────────┘
+```
+
+Reports cover:
+
+* Completion rate
+* Status distribution
+* Completion trends
+* Project progress
+* Workload
+* Member performance
+* Custom date ranges
+
+---
+
+# 👑 Admin Command Center
+
+Administrators get a dedicated control layer.
+
+```text
+                         👑 ADMIN
+                            │
+       ┌────────────────────┼────────────────────┐
+       ▼                    ▼                    ▼
+ 📊 Dashboard          👥 Users            🛡️ Permissions
+       │                    │                    │
+       ▼                    ▼                    ▼
+ 📜 Audit Logs         ⚙️ Settings          🔑 Roles
+```
+
+### Admin capabilities
+
+* 👥 Create, edit and delete users
+* 🔄 Activate/deactivate accounts
+* 🔑 Assign roles
+* 🔐 Reset passwords
+* 🛡️ Permission matrix
+* 📜 Searchable audit logs
+* ⚙️ System settings
+* 📊 System overview
+
+---
+
+# 🔐 Security Architecture
+
+```text
+                   🌐 REQUEST
+                       │
+                       ▼
+                 🛡️ CORS CHECK
+                       │
+                       ▼
+                🪖 HELMET HEADERS
+                       │
+                       ▼
+                 🚦 RATE LIMIT
+                       │
+                       ▼
+               📝 ZOD VALIDATION
+                       │
+                       ▼
+                  🔑 JWT CHECK
+                       │
+                       ▼
+               👤 DATABASE USER
+                       │
+                       ▼
+                🛡️ RBAC GUARD
+                       │
+                       ▼
+                 🎯 CONTROLLER
+                       │
+                       ▼
+                   🍃 MongoDB
+```
+
+### Security Highlights
+
+* 🔐 bcrypt password hashing
+* 🍪 httpOnly + SameSite cookies
+* 🎫 JWT access authentication
+* 🔄 Bearer-token support
+* 🛡️ Role-based authorization
+* 📝 Zod validation
+* 🪖 Helmet headers
+* 🌐 CORS allowlist
+* 🚦 Rate limiting
+* 📜 Audit logging
+* 🔒 Server-side permission enforcement
+
+---
+
+# 🧠 Engineering Highlights
+
+This project demonstrates more than CRUD operations.
+
+### ⚡ Optimistic UI
+
+Kanban interactions update the interface immediately and persist the change in the background.
+
+### 🛡️ Server-Side Authorization
+
+Permissions are checked by the backend rather than trusting frontend role state.
+
+### 📜 Auditability
+
+Security-sensitive operations generate audit events.
+
+### 🧩 Modular Architecture
+
+Controllers, middleware, services, models, validators and routes are separated by responsibility.
+
+### 🎨 Advanced UI Engineering
+
+The interface uses glassmorphism, depth, particles, animations and responsive layouts without sacrificing usability.
+
+### ♿ Reduced Motion
+
+Motion-heavy interactions account for users who prefer reduced animation.
+
+---
+
+# 🏗️ Architecture
+
+```text
+                    ┌───────────────────┐
+                    │      USER         │
+                    └─────────┬─────────┘
+                              │
+                              ▼
+                 ┌──────────────────────┐
+                 │   React + Vite SPA   │
+                 │                      │
+                 │ Pages                │
+                 │ Components           │
+                 │ Context              │
+                 │ API Client           │
+                 └──────────┬───────────┘
+                            │
+                       REST / Axios
+                            │
+                            ▼
+                 ┌──────────────────────┐
+                 │ Express + TypeScript │
+                 │                      │
+                 │ Routes               │
+                 │ Middleware           │
+                 │ Controllers          │
+                 │ Services             │
+                 │ Validators           │
+                 └──────────┬───────────┘
+                            │
+                            ▼
+                    ┌───────────────┐
+                    │   Mongoose    │
+                    └───────┬───────┘
+                            │
+                            ▼
+                      🍃 MongoDB
+```
+
+---
+
+# 🛠️ Technology Stack
+
+### 🎨 Frontend
+
+| Technology       | Purpose             |
+| ---------------- | ------------------- |
+| ⚛️ React 18      | UI                  |
+| ⚡ Vite           | Development & build |
+| 🟦 TypeScript    | Type safety         |
+| 🎨 Tailwind CSS  | Styling             |
+| 🧲 dnd-kit       | Kanban drag & drop  |
+| 🎬 Framer Motion | Animations          |
+| 📊 Recharts      | Data visualization  |
+| 🌐 Axios         | API communication   |
+
+### ⚙️ Backend
+
+| Technology    | Purpose          |
+| ------------- | ---------------- |
+| 🟢 Node.js    | Runtime          |
+| 🚂 Express    | REST API         |
+| 🟦 TypeScript | Type safety      |
+| 🍃 MongoDB    | Database         |
+| 🔗 Mongoose   | ODM              |
+| 🔐 JWT        | Authentication   |
+| 🔒 bcrypt     | Password hashing |
+| 🛡️ Helmet    | Security headers |
+| 📝 Zod        | Validation       |
+
+---
+
+# 📂 Project Structure
 
 ```text
 team-task-manager/
-├── server/                  # Node + Express + TS + Mongoose REST API
+│
+├── 🖥️ client/
 │   └── src/
-│       ├── config/          # env loader, DB connection (+ in-memory fallback)
-│       ├── models/          # User, Project, Task, Team, Comment, Notification,
-│       │                    # Activity, AuditLog, SystemSetting
-│       ├── middleware/      # protect (JWT), RBAC guards, error handler
-│       ├── controllers/     # auth, users, profile, projects, tasks, teams,
-│       │                    # comments, notifications, activity, reports, admin
-│       ├── routes/          # /api/auth /users /projects /tasks /comments
-│       │                    # /notifications /reports /admin /profile /teams
-│       ├── utils/           # jwt signing, audit logger, activity feed, notifier
-│       └── seed/            # realistic demo dataset
-└── client/                  # React 18 + Vite + TS SPA
-    └── src/
-        ├── api/             # axios instance + interceptors
-        ├── components/      # layout (AppShell/Sidebar/Topbar), UI kit,
-        │                    # KanbanBoard (dnd-kit), task modals & rows
-        ├── hooks/           # AuthContext, ToastContext
-        └── pages/           # auth, dashboard, my-tasks, projects, project details,
-                             # kanban, tasks/:id, calendar, team, notifications,
-                             # reports, settings, profile + admin/* pages
+│       ├── api/
+│       ├── components/
+│       ├── hooks/
+│       └── pages/
+│
+├── ⚙️ server/
+│   └── src/
+│       ├── config/
+│       ├── models/
+│       ├── middleware/
+│       ├── controllers/
+│       ├── routes/
+│       ├── utils/
+│       └── seed/
+│
+├── 📄 package.json
+├── ⚙️ .vscode/
+└── 📖 README.md
 ```
-
-## 🔒 Security
-
-- bcrypt (12 rounds) password hashing — passwords never leave the server
-- JWT sessions via **httpOnly, SameSite cookies** *and* `Authorization: Bearer`
-- `protect` middleware reloads the user from DB each request; deactivated accounts are rejected instantly
-- Role checks (`requireAdmin`, team-lead logic, project membership) inside every controller
-- Zod input validation on all mutating endpoints; Mongo cast/duplicate errors normalized
-- Helmet security headers, CORS allow-list, rate limiting on auth routes (30 req / 15 min)
-- Audit logging for logins (incl. failures), user CRUD, role changes, password resets, deletes, settings changes
-- Frontend hides unauthorized actions **but the API enforces them regardless** — e.g. a Regular
-  Member calling `/api/admin/audit-logs` directly receives `403 Forbidden`
-
-## 📜 Scripts
-
-| Root command | Action |
-|---|---|
-| `npm run dev` | Run API + web concurrently |
-| `npm run seed` | Re-seed demo database |
-| `npm run build` | Build server (`tsc`) + client (`vite`) |
-| `npm start` | Start compiled API |
 
 ---
 
-**TEAM TASK MANAGER** · Ultra-3D 2026 Edition
+# 🚀 Quick Start
+
+```bash
+# Clone
+git clone <repository-url>
+
+# Install
+npm install
+npm run install:all
+
+# Start development
+npm run dev
+```
+
+Then open:
+
+**🌐 http://localhost:5173**
+
+The project supports an automatic in-memory MongoDB demo environment, so you can explore the application without configuring an external MongoDB server.
+
+---
+
+# 🎮 Demo Experience
+
+### 👑 Admin
+
+```text
+admin@example.com
+Admin@123
+```
+
+### 🎯 Team Lead
+
+```text
+john@example.com
+John@1234
+```
+
+### 👤 Regular Member
+
+```text
+alex@example.com
+Alex@1234
+```
+
+Use the different accounts to experience how the interface and permissions change between roles.
+
+---
+
+# 🗺️ Roadmap
+
+### ✅ Current
+
+* [x] JWT Authentication
+* [x] RBAC
+* [x] Project Management
+* [x] Kanban
+* [x] Task Management
+* [x] Calendar
+* [x] Notifications
+* [x] Reports
+* [x] Admin Dashboard
+* [x] Audit Logs
+* [x] Ultra-3D UI
+
+### 🔮 Future
+
+* [ ] 💬 Real-time team chat
+* [ ] 🔴 WebSocket live updates
+* [ ] 📱 Mobile application
+* [ ] 🤖 AI task assistant
+* [ ] 🧠 AI productivity insights
+* [ ] 📎 Advanced file management
+* [ ] 🔗 GitHub integration
+* [ ] 🔗 Slack integration
+* [ ] 📊 Advanced team analytics
+* [ ] 🌍 Multi-organization workspaces
+
+---
+
+# 💡 What This Project Demonstrates
+
+```text
+                    FULL-STACK ENGINEERING
+                            │
+       ┌────────────────────┼────────────────────┐
+       ▼                    ▼                    ▼
+   🎨 FRONTEND           ⚙️ BACKEND          🔐 SECURITY
+       │                    │                    │
+   React                Express              JWT
+   TypeScript           MongoDB              RBAC
+   Tailwind             REST APIs             bcrypt
+   Vite                 Mongoose              Helmet
+   Framer Motion        Controllers           Zod
+       │                    │                    │
+       └────────────────────┼────────────────────┘
+                            ▼
+                     🚀 PRODUCTION
+                       ARCHITECTURE
+```
+
+---
+
+# ⭐ Why This Project Stands Out
+
+**TEAM TASK MANAGER isn't just a task CRUD application.**
+
+It demonstrates how a real productivity platform can combine:
+
+**🎨 Modern UX**
+
+**⚙️ Full-stack architecture**
+
+**🔐 Security**
+
+**👥 Role-based collaboration**
+
+**📊 Data visualization**
+
+**🧲 Interactive workflows**
+
+**📜 Auditing**
+
+**📱 Responsive design**
+
+into one cohesive application.
+
+---
+
+<p align="center">
+
+## 🚀 Smart Teamwork. Clear Tasks. Better Results.
+
+**Built with ❤️ using React, TypeScript, Node.js, Express & MongoDB**
+
+⭐ **Star the repository if you like it!**
+
+</p>
