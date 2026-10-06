@@ -4,7 +4,7 @@
 
 ### **Smart Teamwork. Clear Tasks. Better Results.**
 
-**A production-quality Ultra-3D team productivity platform built for modern engineering teams.**
+**A next-generation productivity platform built for fast-moving engineering teams.**
 
 <br/>
 
