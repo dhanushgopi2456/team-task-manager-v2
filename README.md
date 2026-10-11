@@ -1,4 +1,4 @@
-#🚀 Team Task Manager — 
+#🚀 Team Task Manager — Collaborative Workspace with Role-Based Access Control
 
 <p align="center">
 
