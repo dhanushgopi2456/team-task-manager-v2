@@ -76,14 +76,14 @@ into one unified workspace.
 
 # ✨ Feature Showcase
 
-| 🚀 Module                 | What You Get                                                                 |
+| 🚀 Module                 | What You Get                                                                |
 | ------------------------- | ---------------------------------------------------------------------------- |
 | 🔐 **Authentication**     | JWT, httpOnly cookies, Bearer tokens, password recovery and session tracking |
 | 🛡️ **Role-Based Access** | Admin, Team Lead and Regular Member permissions                              |
 | 📊 **Smart Dashboard**    | Productivity score, KPIs, charts, deadlines and live activity                |
 | 📁 **Project Management** | Create, edit, archive, delete and manage project members                     |
 | 🗂️ **Kanban Board**      | Drag & drop workflow with optimistic updates                                 |
-| ✅ **Task Management**     | Status, priority, assignee, tags, due dates and comments                     |
+| ✅ **Task Management**     | Status, priority, assignee, tags, due dates and comments                    |
 | 📅 **Calendar**           | Day, week and month task views                                               |
 | 🔔 **Notifications**      | Assignments, mentions, comments, deadlines and security alerts               |
 | 📈 **Reports**            | Completion rate, trends, workload and member performance                     |
