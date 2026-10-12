@@ -487,43 +487,30 @@ Run the test commands configured in the relevant package files.
 
 ## 📸 Screenshots
 
-Add screenshots from your running application to a `screenshots/` directory.
-
-```text
-screenshots/
-├── dashboard.png
-├── kanban-board.png
-├── project-details.png
-├── calendar.png
-├── analytics.png
-└── admin-dashboard.png
-```
-
 ### Dashboard
 
 <p align="center">
-  <img src="./screenshots/dashboard.png" width="90%" alt="Team Task Manager dashboard"/>
+  <img src="https://github.com/dhanushgopi2456/My-All-Project-Screenshots/blob/main/Screenshot%202026-10-12%20160441.png" width="90%" alt="Team Task Manager dashboard"/>
 </p>
 
 ### Kanban Board
 
 <p align="center">
-  <img src="./screenshots/kanban-board.png" width="90%" alt="Team Task Manager Kanban board"/>
+  <img src="https://github.com/dhanushgopi2456/My-All-Project-Screenshots/blob/main/Screenshot%202026-10-12%20160457.png" width="90%" alt="Team Task Manager Kanban board"/>
 </p>
 
 ### Calendar
 
 <p align="center">
-  <img src="./screenshots/calendar.png" width="90%" alt="Team Task Manager calendar"/>
+  <img src="https://github.com/dhanushgopi2456/My-All-Project-Screenshots/blob/main/Screenshot%202026-10-12%20160519.png" width="90%" alt="Team Task Manager calendar"/>
 </p>
 
 ### Analytics
 
 <p align="center">
-  <img src="./screenshots/analytics.png" width="90%" alt="Team Task Manager analytics"/>
+  <img src="https://github.com/dhanushgopi2456/My-All-Project-Screenshots/blob/main/Screenshot%202026-10-12%20160542.png" width="90%" alt="Team Task Manager analytics"/>
 </p>
 
-Replace these paths with your real screenshot files. Missing files will appear as broken images on GitHub.
 
 ---
 
