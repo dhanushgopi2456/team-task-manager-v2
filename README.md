@@ -24,7 +24,7 @@
   <a href="#-features">Features</a> •
   <a href="#️-architecture">Architecture</a> •
   <a href="#-installation">Installation</a> •
-  <a href="#-roadmap">Roadmap</a>
+  <a href="#roadmap">Roadmap</a>
 </p>
 
 ---
