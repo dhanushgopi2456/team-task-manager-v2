@@ -14,20 +14,22 @@ export default function ResetPassword() {
   const [password, setPassword] = useState('');
   const [confirm, setConfirm] = useState('');
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [busy, setBusy] = useState(false);
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     setError('');
+    setSuccess('');
     if (password !== confirm) return setError('Passwords do not match.');
     if (password.length < 8) return setError('Password must be at least 8 characters.');
     setBusy(true);
     try {
       await api.post('/auth/reset-password', { token, password });
-      setTimeout(() => navigate('/login'), 1200);
+      setSuccess('Password updated successfully! Redirecting to sign in…');
+      setTimeout(() => navigate('/login'), 1500);
     } catch (err) {
       setError(apiError(err));
-    } finally {
       setBusy(false);
     }
   }
@@ -58,18 +60,48 @@ export default function ResetPassword() {
           </p>
         )}
         {error && <p className="mb-4 rounded-xl border border-rose-400/30 bg-rose-500/10 px-3.5 py-2.5 text-sm text-rose-300">{error}</p>}
+        {success && (
+          <p className="mb-4 rounded-xl border border-emerald-400/30 bg-emerald-500/10 px-3.5 py-2.5 text-sm text-emerald-300">
+            {success}
+          </p>
+        )}
 
         <form onSubmit={onSubmit} className="space-y-4">
           <span className="relative block">
             <Lock className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
-            <input required minLength={8} type="password" className="input pl-9" placeholder="New password (min 8 chars)" value={password} onChange={(e) => setPassword(e.target.value)} />
+            <input
+              required
+              minLength={8}
+              type="password"
+              disabled={busy || !!success || !token}
+              className="input pl-9 disabled:opacity-50"
+              placeholder="New password (min 8 chars)"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
           </span>
           <span className="relative block">
             <Lock className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
-            <input required minLength={8} type="password" className="input pl-9" placeholder="Confirm new password" value={confirm} onChange={(e) => setConfirm(e.target.value)} />
+            <input
+              required
+              minLength={8}
+              type="password"
+              disabled={busy || !!success || !token}
+              className="input pl-9 disabled:opacity-50"
+              placeholder="Confirm new password"
+              value={confirm}
+              onChange={(e) => setConfirm(e.target.value)}
+            />
           </span>
-          <button disabled={busy || !token} className="btn-primary w-full">
-            {busy ? <Spinner /> : busy ? 'Updating…' : 'Update Password'}
+          <button disabled={busy || !token || !!success} className="btn-primary w-full">
+            {busy ? (
+              <span className="inline-flex items-center justify-center gap-2">
+                <Spinner />
+                <span>Updating…</span>
+              </span>
+            ) : (
+              'Update Password'
+            )}
           </button>
         </form>
 
