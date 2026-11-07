@@ -1388,70 +1388,95 @@
     /* ─── SMALL SCREENS (<= 820px) ─── */
     @media (max-width: 820px) {
       #navbar {
-        top: 14px;
-        left: 16px;
-        right: 16px;
-        height: 44px;
+        top: 12px;
+        left: 12px;
+        right: 12px;
+        height: 48px;
+        padding: 0 12px;
       }
       .nav-logo {
-        font-size: 19px;
+        font-size: 16px;
+        gap: 8px;
       }
       .nav-orb {
-        width: 28px;
-        height: 28px;
+        width: 26px;
+        height: 26px;
       }
       .nav-center-menu,
-      .nav-login,
       .nav-pill-glass {
         display: none !important;
       }
-      .nav-pill-dk {
-        height: 38px;
+      .nav-login {
+        display: inline-flex !important;
         font-size: 13px;
-        padding: 0 13px;
-        border-radius: 9px;
+        padding: 6px 10px;
+        color: var(--ink);
+      }
+      .nav-pill-dk {
+        height: 34px;
+        font-size: 12.5px;
+        padding: 0 12px;
+        border-radius: 8px;
+        white-space: nowrap;
       }
 
       #hero {
         min-height: 100svh;
+        padding: 90px 20px 36px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
       }
       .hero-headline {
-        left: 20px;
-        bottom: 250px;
+        position: relative;
+        left: 0;
+        bottom: 0;
         top: auto;
-        font-size: 46px;
-        line-height: 44px;
+        font-size: clamp(30px, 8.5vw, 44px);
+        line-height: 1.1;
+        margin-bottom: 12px;
+        max-width: 100%;
       }
       .hero-subline {
-        left: 20px;
-        bottom: 212px;
+        position: relative;
+        left: 0;
+        bottom: 0;
         top: auto;
-        font-size: 16px;
+        font-size: 15px;
+        margin-bottom: 20px;
+        max-width: 100%;
       }
       .hero-buttons {
-        left: 20px;
-        bottom: 140px;
+        position: relative;
+        left: 0;
+        bottom: 0;
         top: auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
       }
       .hero-buttons .btn {
-        height: 46px;
-        font-size: 15px;
+        height: 44px;
+        font-size: 14px;
         padding: 0 16px;
         border-radius: 10px;
       }
       .hero-scroll-card {
+        position: relative;
         left: auto;
-        right: 20px;
-        bottom: 28px;
+        right: 0;
+        bottom: 0;
         top: auto;
-        width: 150px;
-        height: 92px;
-        font-size: 18px;
-        padding: 12px 14px;
+        align-self: flex-end;
+        width: 130px;
+        height: 80px;
+        font-size: 15px;
+        padding: 10px 12px;
       }
       .scroll-arrow-icon {
-        width: 18px;
-        height: 18px;
+        width: 16px;
+        height: 16px;
       }
 
       .lede {
@@ -3311,6 +3336,79 @@
     }
     requestAnimationFrame(animate);
 
+  </script>
+
+  <!-- ─── AUTH SYNCHRONIZATION & IFRAME BREAKOUT SCRIPT ─── -->
+  <script>
+    (function () {
+      function checkAuth() {
+        var token = null;
+        try {
+          token = localStorage.getItem('ttm_token');
+        } catch (e) {}
+
+        var urlParams = new URLSearchParams(window.location.search);
+        var isAuth = !!token || urlParams.get('auth') === '1';
+
+        if (isAuth) {
+          // Update Login links to Dashboard
+          document.querySelectorAll('.nav-login, a[href="/login"]').forEach(function (el) {
+            el.setAttribute('href', '/dashboard');
+            if (el.textContent.trim().toLowerCase() === 'login') {
+              el.textContent = 'Dashboard';
+            }
+          });
+
+          // Update Get Started links to Open Workspace / Dashboard
+          document.querySelectorAll('.nav-pill-dk, a[href="/register"]').forEach(function (el) {
+            el.setAttribute('href', '/dashboard');
+            var txt = el.textContent.trim();
+            if (txt.indexOf('Get Started') !== -1 || txt.indexOf('Get started') !== -1) {
+              el.textContent = 'Open Dashboard →';
+            }
+          });
+
+          // Update hero and section CTA buttons
+          document.querySelectorAll('.hero-buttons a, .studio-buttons a, .cta-panel a').forEach(function (el) {
+            var href = el.getAttribute('href');
+            if (href === '/login' || href === '/register') {
+              el.setAttribute('href', '/dashboard');
+              if (el.classList.contains('btn-fill')) {
+                el.textContent = 'Open Workspace →';
+              } else if (el.classList.contains('btn-ghost')) {
+                el.textContent = 'Go to Dashboard';
+              }
+            }
+          });
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', checkAuth);
+      } else {
+        checkAuth();
+      }
+
+      // Intercept clicks: notify parent window for client-side routing & breakout of iframe
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest('a');
+        if (!a) return;
+        var href = a.getAttribute('href');
+        if (href && href.startsWith('/')) {
+          e.preventDefault();
+          if (window.parent && window.parent !== window) {
+            try {
+              window.parent.postMessage({ type: 'TTM_NAVIGATE', to: href }, '*');
+            } catch (err) {}
+          }
+          if (window.top && window.top !== window) {
+            window.top.location.href = href;
+          } else {
+            window.location.href = href;
+          }
+        }
+      });
+    })();
   </script>
 </body>
 </html>

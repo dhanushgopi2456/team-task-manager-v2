@@ -59,7 +59,7 @@ export function Sidebar({
 
   const content = (
     <div className="flex h-full flex-col">
-      <div className="px-4 pb-6 pt-6">
+      <div className="px-4 pb-6 pt-6" onClick={onCloseMobile}>
         <BrandLockup compact={!open} />
       </div>
 

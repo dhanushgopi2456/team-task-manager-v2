@@ -54,8 +54,8 @@ export default function Login() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="hidden lg:block"
         >
-          <div className="mb-6 flex items-center gap-3">
-            <div className="animate-float-y drop-shadow-[0_12px_30px_rgba(99,102,241,.55)]">
+          <Link to="/landing" className="mb-6 flex items-center gap-3 group transition hover:opacity-90" title="Go to Team Task Manager landing page">
+            <div className="animate-float-y drop-shadow-[0_12px_30px_rgba(99,102,241,.55)] transition-transform group-hover:scale-105">
               <Logo size={56} />
             </div>
             <div>
@@ -64,7 +64,7 @@ export default function Login() {
               </h1>
               <p className="text-sm font-medium tracking-wide text-slate-300">Smart Teamwork. Clear Tasks. Better Results.</p>
             </div>
-          </div>
+          </Link>
           <p className="mb-8 max-w-md text-base leading-relaxed text-slate-300">
             The Ultra-3D productivity platform for modern teams — projects, kanban, analytics and
             collaboration in one futuristic workspace.
@@ -100,11 +100,13 @@ export default function Login() {
           className="relative mx-auto w-full max-w-md rounded-2xl border border-white/20 bg-[#090d22]/95 p-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95)] backdrop-blur-2xl"
         >
           <div className="mb-7 flex flex-col items-center gap-3 text-center lg:hidden">
-            <Logo size={52} />
-            <div>
-              <h1 className="font-display text-xl font-extrabold tracking-wide brand-gradient-text">TEAM TASK MANAGER</h1>
-              <p className="text-xs font-medium tracking-wide text-slate-300">Smart Teamwork. Clear Tasks. Better Results.</p>
-            </div>
+            <Link to="/landing" className="group flex flex-col items-center gap-2 transition hover:opacity-90" title="Go to Team Task Manager landing page">
+              <Logo size={52} />
+              <div>
+                <h1 className="font-display text-xl font-extrabold tracking-wide brand-gradient-text">TEAM TASK MANAGER</h1>
+                <p className="text-xs font-medium tracking-wide text-slate-300">Smart Teamwork. Clear Tasks. Better Results.</p>
+              </div>
+            </Link>
           </div>
 
           <h2 className="font-display text-2xl font-bold text-white">Welcome back</h2>

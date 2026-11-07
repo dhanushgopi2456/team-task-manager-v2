@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Bell, Menu, CheckCheck, PanelLeftClose, PanelLeftOpen } from 'lucide-react';
+import { Bell, Menu, CheckCheck, PanelLeftOpen, PanelLeftClose } from 'lucide-react';
 import { api } from '../../api/client';
 import type { NotificationItem } from '../../types';
-import { Avatar } from '../ui/primitives';
+import { Avatar, Logo } from '../ui/primitives';
 import { useAuth } from '../../hooks/useAuth';
 
 function timeAgo(iso: string) {
@@ -141,7 +141,7 @@ export function Topbar({
   return (
     <header className="sticky top-0 z-30 mb-6 px-1 pt-1">
       <div className="glass flex items-center justify-between rounded-2xl px-4 py-3 shadow-glass">
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2.5">
           <button
             onClick={onToggleSidebar}
             className="hidden rounded-xl p-2 text-muted transition hover:bg-white/10 hover:text-white lg:block"
@@ -156,6 +156,16 @@ export function Topbar({
           >
             <Menu size={20} />
           </button>
+          <Link
+            to="/landing"
+            className="flex items-center gap-2 transition hover:opacity-90 lg:hidden"
+            title="Team Task Manager — Home"
+          >
+            <Logo size={28} />
+            <span className="font-display text-xs sm:text-sm font-extrabold tracking-wide brand-gradient-text">
+              TEAM TASK MANAGER
+            </span>
+          </Link>
         </div>
 
         <div className="flex items-center gap-3">

@@ -53,8 +53,10 @@ export default function ResetPassword() {
         className="relative z-10 mx-auto w-full max-w-md rounded-2xl border border-white/20 bg-[#090d22]/95 p-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95)] backdrop-blur-2xl"
       >
         <div className="mb-6 flex flex-col items-center gap-3 text-center">
-          <Logo size={48} />
-          <h1 className="font-display text-xl font-extrabold brand-gradient-text">TEAM TASK MANAGER</h1>
+          <Link to="/landing" className="group flex flex-col items-center gap-2 transition hover:opacity-90" title="Go to Team Task Manager landing page">
+            <Logo size={48} />
+            <h1 className="font-display text-xl font-extrabold brand-gradient-text">TEAM TASK MANAGER</h1>
+          </Link>
           <h2 className="font-display text-xl font-bold text-white">Set a new password</h2>
         </div>
 

@@ -1,4 +1,5 @@
 import type { ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 
 /* ─── Brand logo mark ─────────────────────────────────────────────── */
@@ -19,19 +20,27 @@ export function Logo({ size = 40 }: { size?: number }) {
   );
 }
 
-export function BrandLockup({ compact = false }: { compact?: boolean }) {
-  return (
+export function BrandLockup({ compact = false, to = '/landing' }: { compact?: boolean; to?: string }) {
+  const content = (
     <div className="flex items-center gap-3">
       <div className="drop-shadow-[0_6px_16px_rgba(99,102,241,.45)] transition-transform duration-500 hover:rotate-6">
         <Logo size={compact ? 34 : 42} />
       </div>
       {!compact && (
         <div className="leading-tight">
-          <p className="font-display text-[15px] font-extrabold tracking-wide">TEAM TASK MANAGER</p>
+          <p className="font-display text-[15px] font-extrabold tracking-wide brand-gradient-text">TEAM TASK MANAGER</p>
           <p className="text-[10px] font-medium tracking-[0.14em] text-muted uppercase">Smart Teamwork · Clear Tasks</p>
         </div>
       )}
     </div>
+  );
+
+  return to ? (
+    <Link to={to} className="group inline-flex items-center transition hover:opacity-90" title="Team Task Manager — Home">
+      {content}
+    </Link>
+  ) : (
+    content
   );
 }
 
