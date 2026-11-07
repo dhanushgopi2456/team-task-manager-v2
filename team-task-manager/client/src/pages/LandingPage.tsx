@@ -9,6 +9,12 @@ export default function LandingPage() {
   useEffect(() => {
     document.title = 'Team Task Manager — Smart Teamwork. Clear Tasks. Better Results.';
 
+    // Hide host window scrollbar completely while on landing page
+    const prevHtmlOverflow = document.documentElement.style.overflow;
+    const prevBodyOverflow = document.body.style.overflow;
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
+
     const handleMessage = (e: MessageEvent) => {
       if (e.data && e.data.type === 'TTM_NAVIGATE') {
         const target = e.data.to;
@@ -24,7 +30,11 @@ export default function LandingPage() {
     };
 
     window.addEventListener('message', handleMessage);
-    return () => window.removeEventListener('message', handleMessage);
+    return () => {
+      document.documentElement.style.overflow = prevHtmlOverflow;
+      document.body.style.overflow = prevBodyOverflow;
+      window.removeEventListener('message', handleMessage);
+    };
   }, [navigate, user]);
 
   return (
@@ -32,7 +42,11 @@ export default function LandingPage() {
       <iframe
         src={`/landing.html${user ? '?auth=1' : ''}`}
         title="Team Task Manager Landing Page"
-        className="w-full h-full border-0"
+        className="w-full h-full border-0 select-none overflow-hidden"
+        style={{
+          scrollbarWidth: 'none',
+          msOverflowStyle: 'none',
+        }}
         allow="autoplay; fullscreen"
       />
     </div>
