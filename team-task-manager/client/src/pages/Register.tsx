@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Eye, EyeOff, Lock, Mail, User, Info } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { apiError } from '../api/client';
-import { BackgroundFX } from '../components/layout/BackgroundFX';
+import { DitherPrismBackground } from '../components/ui/DitherPrismHero';
 import { Logo } from '../components/ui/primitives';
 import { Spinner } from '../components/ui/feedback';
 
@@ -37,7 +37,17 @@ export default function Register() {
 
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-10">
-      <BackgroundFX />
+      <DitherPrismBackground
+        color1="#05070f"
+        color2="#6366f1"
+        color3="#06b6d4"
+        speed={0.8}
+        ditherIntensity={0.14}
+        prismIntensity={0.45}
+        particleCount={45}
+        showParticles={true}
+        particleColor="#a5b4fc"
+      />
       <motion.div
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}

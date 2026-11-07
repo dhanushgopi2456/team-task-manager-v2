@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Mail, KeyRound } from 'lucide-react';
 import { api, apiError } from '../api/client';
-import { BackgroundFX } from '../components/layout/BackgroundFX';
+import { DitherPrismBackground } from '../components/ui/DitherPrismHero';
 import { Logo } from '../components/ui/primitives';
 import { Spinner } from '../components/ui/feedback';
 
@@ -31,7 +31,17 @@ export default function ForgotPassword() {
 
   return (
     <div className="relative flex min-h-screen items-center justify-center px-4">
-      <BackgroundFX />
+      <DitherPrismBackground
+        color1="#05070f"
+        color2="#6366f1"
+        color3="#06b6d4"
+        speed={0.8}
+        ditherIntensity={0.14}
+        prismIntensity={0.45}
+        particleCount={45}
+        showParticles={true}
+        particleColor="#a5b4fc"
+      />
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}

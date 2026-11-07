@@ -3,7 +3,7 @@ import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Lock } from 'lucide-react';
 import { api, apiError } from '../api/client';
-import { BackgroundFX } from '../components/layout/BackgroundFX';
+import { DitherPrismBackground } from '../components/ui/DitherPrismHero';
 import { Logo } from '../components/ui/primitives';
 import { Spinner } from '../components/ui/feedback';
 
@@ -34,7 +34,17 @@ export default function ResetPassword() {
 
   return (
     <div className="relative flex min-h-screen items-center justify-center px-4">
-      <BackgroundFX />
+      <DitherPrismBackground
+        color1="#05070f"
+        color2="#6366f1"
+        color3="#06b6d4"
+        speed={0.8}
+        ditherIntensity={0.14}
+        prismIntensity={0.45}
+        particleCount={45}
+        showParticles={true}
+        particleColor="#a5b4fc"
+      />
       <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="card3d relative z-10 w-full max-w-md !p-8 shadow-glass-lg">
         <div className="mb-6 flex flex-col items-center gap-3 text-center">
           <Logo size={48} />

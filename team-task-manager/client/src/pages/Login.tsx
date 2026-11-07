@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import { Eye, EyeOff, Lock, Mail, ShieldCheck, Sparkles, Users2, Zap } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import { apiError } from '../api/client';
-import { BackgroundFX } from '../components/layout/BackgroundFX';
+import { DitherPrismBackground } from '../components/ui/DitherPrismHero';
 import { Logo } from '../components/ui/primitives';
 import { Spinner } from '../components/ui/feedback';
 
@@ -34,7 +34,17 @@ export default function Login() {
 
   return (
     <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-10">
-      <BackgroundFX />
+      <DitherPrismBackground
+        color1="#05070f"
+        color2="#6366f1"
+        color3="#06b6d4"
+        speed={0.8}
+        ditherIntensity={0.14}
+        prismIntensity={0.45}
+        particleCount={45}
+        showParticles={true}
+        particleColor="#a5b4fc"
+      />
 
       <div className="relative z-10 grid w-full max-w-5xl gap-10 lg:grid-cols-[1.1fr_1fr] lg:items-center">
         {/* Brand story */}
