@@ -105,10 +105,12 @@ export function Sidebar({
         </NavLink>
         <button
           onClick={async () => {
+            onCloseMobile();
             await logout();
-            navigate('/login');
+            navigate('/landing');
           }}
           className="flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-muted transition hover:bg-rose-500/10 hover:text-rose-300"
+          title="Sign out and return to landing page"
         >
           <LogOut size={17} />
           {open && <span className="text-sm font-semibold">Logout</span>}

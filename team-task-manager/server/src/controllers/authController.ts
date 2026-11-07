@@ -72,8 +72,8 @@ export const register = asyncHandler(async (req: AuthRequest, res: Response) => 
     link: '/dashboard',
   });
 
-  const token = sendSession(res, String(user._id), true);
-  res.status(201).json({ success: true, token, user: publicUser(user) });
+  // Account created: do not auto-login session so user is redirected to login page before accessing dashboard
+  res.status(201).json({ success: true, user: publicUser(user) });
 });
 
 export const login = asyncHandler(async (req: AuthRequest, res: Response) => {

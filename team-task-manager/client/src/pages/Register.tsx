@@ -27,7 +27,13 @@ export default function Register() {
     setBusy(true);
     try {
       await register(name, email, password);
-      navigate('/dashboard');
+      navigate('/login', {
+        state: {
+          registered: true,
+          email,
+          message: 'Account created successfully! Please sign in to continue.',
+        },
+      });
     } catch (err) {
       setError(apiError(err, 'Unable to create account'));
     } finally {

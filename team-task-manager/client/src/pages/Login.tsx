@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Eye, EyeOff, Lock, Mail, ShieldCheck, Sparkles, Users2, Zap } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
@@ -11,16 +11,22 @@ import { Spinner } from '../components/ui/feedback';
 export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
+  const location = useLocation();
+  const stateMessage = (location.state as any)?.message;
+  const prefillEmail = (location.state as any)?.email;
+
+  const [email, setEmail] = useState(prefillEmail || '');
   const [password, setPassword] = useState('');
   const [remember, setRemember] = useState(true);
   const [showPw, setShowPw] = useState(false);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState(stateMessage || '');
   const [busy, setBusy] = useState(false);
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     setError('');
+    setSuccess('');
     setBusy(true);
     try {
       await login(email, password, remember);
@@ -111,6 +117,16 @@ export default function Login() {
 
           <h2 className="font-display text-2xl font-bold text-white">Welcome back</h2>
           <p className="mt-1 text-sm text-slate-300">Sign in to your workspace to continue.</p>
+
+          {success && (
+            <motion.p
+              initial={{ opacity: 0, y: -6 }}
+              animate={{ opacity: 1, y: 0 }}
+              className="mt-4 rounded-xl border border-emerald-400/30 bg-emerald-500/10 px-3.5 py-2.5 text-sm font-medium text-emerald-300"
+            >
+              {success}
+            </motion.p>
+          )}
 
           {error && (
             <motion.p
