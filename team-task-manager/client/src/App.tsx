@@ -5,6 +5,7 @@ import { AuthProvider, useAuth } from './hooks/useAuth';
 import { ToastProvider } from './hooks/useToast';
 import { AppShell } from './components/layout/AppShell';
 import { BrandLoader } from './components/layout/BackgroundFX';
+import { Animated3DCursor } from './components/ui/Animated3DCursor';
 
 const LandingPage = lazy(() => import('./pages/LandingPage'));
 const Login = lazy(() => import('./pages/Login'));
@@ -58,6 +59,7 @@ export default function App() {
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <ToastProvider>
+          <Animated3DCursor />
           <BrowserRouter>
             <Suspense fallback={<BrandLoader label="Loading module…" />}>
             <Routes>

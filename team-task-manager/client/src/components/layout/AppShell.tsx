@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { BackgroundFX } from './BackgroundFX';
 import { Sidebar } from './Sidebar';
 import { Topbar } from './Topbar';
+import { Animated3DCursor } from '../ui/Animated3DCursor';
 
 export function AppShell() {
   const [collapsed, setCollapsed] = useState(false);
@@ -10,6 +11,7 @@ export function AppShell() {
 
   return (
     <div className="relative min-h-screen">
+      <Animated3DCursor />
       <BackgroundFX />
       <Sidebar open={!collapsed} mobileOpen={mobileOpen} onCloseMobile={() => setMobileOpen(false)} />
       <div className="relative z-10">

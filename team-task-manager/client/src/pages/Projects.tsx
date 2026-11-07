@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { motion } from 'framer-motion';
-import { Plus, FolderKanban, CalendarDays, Users2, CheckCircle2, Archive, Pencil, Trash2, Search } from 'lucide-react';
+import { Plus, FolderKanban, CalendarDays, Users2, CheckCircle2, Archive, Pencil, Trash2, Search, Sparkles, Wand2 } from 'lucide-react';
 import { api, apiError } from '../api/client';
 import type { Project } from '../types';
 import { PageHeader, ProgressBar, Avatar, PRIORITY_STYLES } from '../components/ui/primitives';
@@ -19,6 +19,63 @@ const STATUS_STYLES: Record<string, string> = {
 };
 
 const COLORS = ['#6366f1', '#8b5cf6', '#ec4899', '#f59e0b', '#10b981', '#06b6d4'];
+
+const AI_PROJECT_TEMPLATES = [
+  {
+    chip: '🛒 E-Commerce Platform',
+    name: 'FreshMart AI E-Commerce Platform',
+    description: 'Next-gen omnichannel grocery platform featuring real-time inventory tracking, AI personalized recommendations, multi-vendor cart checkout, and sub-second catalog search.',
+    status: 'active',
+    priority: 'high',
+    daysAhead: 30,
+    color: '#6366f1',
+  },
+  {
+    chip: '📱 Fintech Mobile App',
+    name: 'FinPulse Wealth & Banking App v2',
+    description: 'Ultra-secure biometric fintech mobile app with biometric FaceID sign-in, instant SEPA/ACH wire transfers, automated savings vaults, and interactive portfolio analytics.',
+    status: 'active',
+    priority: 'urgent',
+    daysAhead: 45,
+    color: '#06b6d4',
+  },
+  {
+    chip: '⚡ Cloud Microservices',
+    name: 'Cloud Infrastructure & Kubernetes Mesh',
+    description: 'Zero-downtime multi-region cloud migration: Istio service mesh, auto-scaling microservices, Terraform IaC, distributed tracing, and automated canary deployments.',
+    status: 'planning',
+    priority: 'high',
+    daysAhead: 60,
+    color: '#f59e0b',
+  },
+  {
+    chip: '🎨 Design System',
+    name: 'Enterprise Design System & UI Kit',
+    description: 'Unified cross-platform design token architecture, WCAG 2.1 AAA accessible UI components, interactive Figma Code Connect synchronization, and zero-runtime CSS theme engine.',
+    status: 'active',
+    priority: 'medium',
+    daysAhead: 21,
+    color: '#ec4899',
+  },
+  {
+    chip: '🔒 Security Compliance',
+    name: 'SOC2 Type II Security & Compliance Hardening',
+    description: 'End-to-end security posture hardening: automated role-based access control, immutable audit trails, credential rotation policies, and continuous penetration testing verification.',
+    status: 'active',
+    priority: 'urgent',
+    daysAhead: 14,
+    color: '#10b981',
+  },
+  {
+    chip: '🤖 AI Automation Engine',
+    name: 'Autonomous Agent Workflow Orchestrator',
+    description: 'Multi-agent event-driven automation framework with vector knowledge retrieval, real-time Slack/Teams webhook notifications, and human-in-the-loop task approval gates.',
+    status: 'planning',
+    priority: 'high',
+    daysAhead: 28,
+    color: '#8b5cf6',
+  },
+];
 
 export function ProjectFormModal({
   open,
@@ -37,6 +94,28 @@ export function ProjectFormModal({
   const [priority, setPriority] = useState('medium');
   const [color, setColor] = useState(COLORS[0]);
   const [deadline, setDeadline] = useState('');
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const applyTemplate = (tmpl: (typeof AI_PROJECT_TEMPLATES)[number]) => {
+    setIsGenerating(true);
+    setTimeout(() => {
+      setName(tmpl.name);
+      setDescription(tmpl.description);
+      setStatus(tmpl.status as any);
+      setPriority(tmpl.priority as any);
+      setColor(tmpl.color);
+      const targetDate = new Date();
+      targetDate.setDate(targetDate.getDate() + tmpl.daysAhead);
+      setDeadline(targetDate.toISOString().slice(0, 10));
+      setIsGenerating(false);
+      toast(`✨ Auto-filled with AI recommendation: "${tmpl.name}"`);
+    }, 220);
+  };
+
+  const handleRandomAIFill = () => {
+    const randomTmpl = AI_PROJECT_TEMPLATES[Math.floor(Math.random() * AI_PROJECT_TEMPLATES.length)];
+    applyTemplate(randomTmpl);
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -79,6 +158,42 @@ export function ProjectFormModal({
         }}
         className="space-y-4"
       >
+        {/* AI Auto-Fill Recommendation Panel */}
+        {!project && (
+          <div className="rounded-2xl border border-indigo-500/25 bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-cyan-500/10 p-3.5 shadow-inner">
+            <div className="flex items-center justify-between gap-2 mb-2.5">
+              <span className="flex items-center gap-1.5 text-xs font-bold text-indigo-300">
+                <Sparkles size={14} className="text-cyan-300 animate-pulse" />
+                <span>AI Recommendation Engine</span>
+              </span>
+              <button
+                type="button"
+                onClick={handleRandomAIFill}
+                disabled={isGenerating}
+                className="flex items-center gap-1.5 rounded-lg border border-indigo-400/40 bg-indigo-600/30 px-2.5 py-1 text-[11px] font-bold text-indigo-200 transition-all hover:bg-indigo-600/50 hover:text-white"
+              >
+                <Wand2 size={12} className={isGenerating ? 'animate-spin' : ''} />
+                <span>{isGenerating ? 'Generating…' : '✨ Auto-Fill with AI'}</span>
+              </button>
+            </div>
+            <p className="mb-2 text-[11px] text-slate-300">
+              Select an AI smart template or click Auto-Fill to populate recommended specifications:
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {AI_PROJECT_TEMPLATES.map((tmpl) => (
+                <button
+                  key={tmpl.name}
+                  type="button"
+                  onClick={() => applyTemplate(tmpl)}
+                  className="rounded-lg border border-white/10 bg-black/30 px-2.5 py-1 text-[11px] font-medium text-slate-300 transition-all hover:border-indigo-400/60 hover:bg-indigo-500/20 hover:text-white active:scale-95"
+                >
+                  {tmpl.chip}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
         <label className="block">
           <span className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-muted">Project name *</span>
           <input required minLength={2} className="input" placeholder="e.g. FreshMart E-Commerce" value={name} onChange={(e) => setName(e.target.value)} />

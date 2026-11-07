@@ -1,9 +1,67 @@
 import { useEffect, useState } from 'react';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { Sparkles, Wand2 } from 'lucide-react';
 import { api, apiError } from '../api/client';
 import type { Project, Task, User } from '../types';
 import { Modal } from './ui/feedback';
 import { useToast } from '../hooks/useToast';
+
+const AI_TASK_TEMPLATES = [
+  {
+    chip: '🔐 Auth & OAuth API',
+    title: 'Architect JWT Authentication & OAuth2 Session Security',
+    description: 'Implement secure authentication service using bcrypt password hashing, rotating JWT session tokens in httpOnly SameSite cookies, and rate-limited brute-force guards.\n\nAcceptance Criteria:\n- Endpoints: /auth/login, /auth/register, /auth/refresh\n- Token revocation audit logging\n- Unit & integration tests > 90% coverage',
+    status: 'in_progress',
+    priority: 'urgent',
+    daysAhead: 5,
+    tags: 'auth, security, backend, api',
+  },
+  {
+    chip: '📋 Kanban Board DnD',
+    title: 'Build Interactive Kanban Drag-and-Drop Workflow Board',
+    description: 'Create responsive visual task board with smooth collision detection, optimistic UI updates, column lane statistics, and persistent drag ordering via REST API.\n\nAcceptance Criteria:\n- Accessible keyboard reordering\n- Sound juice & spring physics\n- Cross-browser touch drag support',
+    status: 'todo',
+    priority: 'high',
+    daysAhead: 7,
+    tags: 'kanban, ui, frontend, dnd',
+  },
+  {
+    chip: '⚡ Redis Cache & Indexes',
+    title: 'Optimize Database Query Indexes & Write-Through Redis Cache',
+    description: 'Analyze slow query logs, create compound B-tree indexes on project/task collections, and introduce write-through Redis cache layer for dashboard KPI queries.\n\nAcceptance Criteria:\n- P99 response time reduced below 50ms\n- Index usage verification in Mongo explain plans',
+    status: 'todo',
+    priority: 'high',
+    daysAhead: 4,
+    tags: 'database, performance, backend, redis',
+  },
+  {
+    chip: '🔔 Realtime Activity Feed',
+    title: 'Design Real-Time Activity Feed & Push Notifications',
+    description: 'Implement event-driven notification dispatch pipeline for task assignments, status changes, mentions, and project milestones.\n\nAcceptance Criteria:\n- Unread counter badge with instant live sync\n- Mark all read action with toast feedback',
+    status: 'todo',
+    priority: 'medium',
+    daysAhead: 6,
+    tags: 'notifications, realtime, ui',
+  },
+  {
+    chip: '🚀 CI/CD & E2E Suite',
+    title: 'Automated CI/CD Deployment Pipeline & Playwright E2E Suite',
+    description: 'Configure GitHub Actions workflow for automated linting, TypeScript validation, container build, and staging deployment with preview URLs.\n\nAcceptance Criteria:\n- Zero-downtime deployment script\n- Slack build status webhook integration',
+    status: 'todo',
+    priority: 'medium',
+    daysAhead: 8,
+    tags: 'devops, cicd, testing, docker',
+  },
+  {
+    chip: '📱 Mobile Touch Polish',
+    title: 'Mobile Touch Navigation & High-Contrast Glassmorphism Polish',
+    description: 'Refine responsive mobile viewport styling: bottom drawer menu, swipe gestures, touch-friendly 44px tap targets, and high-contrast ambient glass cards.\n\nAcceptance Criteria:\n- 100% Google Lighthouse mobile accessibility score\n- Zero horizontal scroll clipping',
+    status: 'in_progress',
+    priority: 'high',
+    daysAhead: 3,
+    tags: 'mobile, ux, css, responsive',
+  },
+];
 
 export function TaskFormModal({
   open,
@@ -32,6 +90,28 @@ export function TaskFormModal({
   const [dueDate, setDueDate] = useState('');
   const [tags, setTags] = useState('');
   const [chosenProject, setChosenProject] = useState('');
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const applyTemplate = (tmpl: (typeof AI_TASK_TEMPLATES)[number]) => {
+    setIsGenerating(true);
+    setTimeout(() => {
+      setTitle(tmpl.title);
+      setDescription(tmpl.description);
+      setStatus(tmpl.status as any);
+      setPriority(tmpl.priority as any);
+      const targetDate = new Date();
+      targetDate.setDate(targetDate.getDate() + tmpl.daysAhead);
+      setDueDate(targetDate.toISOString().slice(0, 10));
+      setTags(tmpl.tags);
+      setIsGenerating(false);
+      toast(`✨ Auto-filled with AI recommendation: "${tmpl.title}"`);
+    }, 220);
+  };
+
+  const handleRandomAIFill = () => {
+    const randomTmpl = AI_TASK_TEMPLATES[Math.floor(Math.random() * AI_TASK_TEMPLATES.length)];
+    applyTemplate(randomTmpl);
+  };
 
   useEffect(() => {
     if (!open) return;
@@ -97,6 +177,42 @@ export function TaskFormModal({
         }}
         className="space-y-4"
       >
+        {/* AI Auto-Fill Recommendation Panel */}
+        {!task && (
+          <div className="rounded-2xl border border-indigo-500/25 bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-cyan-500/10 p-3.5 shadow-inner">
+            <div className="flex items-center justify-between gap-2 mb-2.5">
+              <span className="flex items-center gap-1.5 text-xs font-bold text-indigo-300">
+                <Sparkles size={14} className="text-cyan-300 animate-pulse" />
+                <span>AI Recommendation Engine</span>
+              </span>
+              <button
+                type="button"
+                onClick={handleRandomAIFill}
+                disabled={isGenerating}
+                className="flex items-center gap-1.5 rounded-lg border border-indigo-400/40 bg-indigo-600/30 px-2.5 py-1 text-[11px] font-bold text-indigo-200 transition-all hover:bg-indigo-600/50 hover:text-white"
+              >
+                <Wand2 size={12} className={isGenerating ? 'animate-spin' : ''} />
+                <span>{isGenerating ? 'Generating…' : '✨ Auto-Fill with AI'}</span>
+              </button>
+            </div>
+            <p className="mb-2 text-[11px] text-slate-300">
+              Select an AI smart template or click Auto-Fill to populate recommended specifications:
+            </p>
+            <div className="flex flex-wrap gap-1.5">
+              {AI_TASK_TEMPLATES.map((tmpl) => (
+                <button
+                  key={tmpl.title}
+                  type="button"
+                  onClick={() => applyTemplate(tmpl)}
+                  className="rounded-lg border border-white/10 bg-black/30 px-2.5 py-1 text-[11px] font-medium text-slate-300 transition-all hover:border-indigo-400/60 hover:bg-indigo-500/20 hover:text-white active:scale-95"
+                >
+                  {tmpl.chip}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
         {!projectId && !task && (
           <label className="block">
             <span className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-muted">Project *</span>
