@@ -45,7 +45,7 @@ export default function ForgotPassword() {
       <motion.div
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        className="card3d relative z-10 w-full max-w-md !p-8 shadow-glass-lg"
+        className="relative z-10 mx-auto w-full max-w-md rounded-2xl border border-white/20 bg-[#090d22]/95 p-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95)] backdrop-blur-2xl"
       >
         <div className="mb-6 flex flex-col items-center gap-3 text-center">
           <Logo size={48} />
@@ -54,15 +54,15 @@ export default function ForgotPassword() {
 
         {!sent ? (
           <>
-            <h2 className="font-display text-lg font-bold">Forgot your password?</h2>
-            <p className="mt-1 text-sm text-muted">Enter your email and we'll generate a secure reset link.</p>
-            {error && <p className="mt-4 rounded-xl border border-rose-400/30 bg-rose-500/10 px-3.5 py-2.5 text-sm text-rose-300">{error}</p>}
+            <h2 className="font-display text-xl font-bold text-white">Forgot your password?</h2>
+            <p className="mt-1 text-sm text-slate-300">Enter your email and we'll generate a secure reset link.</p>
+            {error && <p className="mt-4 rounded-xl border border-rose-400/30 bg-rose-500/10 px-3.5 py-2.5 text-sm font-medium text-rose-300">{error}</p>}
             <form onSubmit={onSubmit} className="mt-5 space-y-4">
               <span className="relative block">
-                <Mail className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+                <Mail className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-indigo-300" size={16} />
                 <input required type="email" className="input pl-9" placeholder="you@company.com" value={email} onChange={(e) => setEmail(e.target.value)} />
               </span>
-              <button disabled={busy} className="btn-primary w-full">{busy ? <Spinner /> : 'Send Reset Link'}</button>
+              <button disabled={busy} className="btn-primary w-full !py-3 text-base">{busy ? <Spinner /> : 'Send Reset Link'}</button>
             </form>
           </>
         ) : (
@@ -70,14 +70,14 @@ export default function ForgotPassword() {
             <div className="mx-auto w-fit rounded-2xl bg-gradient-to-br from-emerald-500/25 to-emerald-500/5 p-3.5 text-emerald-300">
               <KeyRound size={28} />
             </div>
-            <h2 className="mt-4 text-center font-display text-lg font-bold">Check your inbox</h2>
-            <p className="mt-1 text-center text-sm text-muted">
+            <h2 className="mt-4 text-center font-display text-xl font-bold text-white">Check your inbox</h2>
+            <p className="mt-1 text-center text-sm text-slate-300">
               If an account exists for {email}, a password reset link has been generated.
             </p>
             {devLink && (
-              <div className="mt-4 rounded-xl border border-white/10 bg-black/20 p-3 text-xs leading-relaxed text-muted">
-                <span className="font-bold text-slate-300">Demo mode:</span> no SMTP configured —{' '}
-                <Link to={devLink} className="font-bold text-indigo-300 underline underline-offset-2 hover:text-indigo-200">
+              <div className="mt-4 rounded-xl border border-indigo-400/25 bg-[#060919]/90 p-3.5 text-xs leading-relaxed text-slate-300">
+                <span className="font-bold text-indigo-300">Demo mode:</span> no SMTP configured —{' '}
+                <Link to={devLink} className="font-bold text-indigo-300 underline underline-offset-2 hover:text-indigo-100">
                   open reset link
                 </Link>
               </div>
@@ -85,8 +85,8 @@ export default function ForgotPassword() {
           </motion.div>
         )}
 
-        <p className="mt-6 text-center text-sm text-muted">
-          <Link to="/login" className="font-bold text-indigo-300 transition hover:text-indigo-200">← Back to sign in</Link>
+        <p className="mt-6 text-center text-sm text-slate-300">
+          <Link to="/login" className="font-bold text-indigo-300 transition hover:text-indigo-100 underline underline-offset-4">← Back to sign in</Link>
         </p>
       </motion.div>
     </div>

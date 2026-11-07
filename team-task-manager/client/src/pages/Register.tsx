@@ -52,14 +52,14 @@ export default function Register() {
         initial={{ opacity: 0, y: 40 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="card3d relative z-10 w-full max-w-md !p-8 shadow-glass-lg"
+        className="relative z-10 mx-auto w-full max-w-md rounded-2xl border border-white/20 bg-[#090d22]/95 p-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95)] backdrop-blur-2xl"
       >
         <div className="mb-7 flex flex-col items-center gap-3 text-center">
           <Logo size={52} />
           <div>
             <h1 className="font-display text-xl font-extrabold tracking-wide brand-gradient-text">TEAM TASK MANAGER</h1>
-            <p className="mt-1 font-display text-lg font-bold">Create Your Account</p>
-            <p className="text-xs text-muted">Join your team — Smart Teamwork. Clear Tasks. Better Results.</p>
+            <p className="mt-1 font-display text-xl font-bold text-white">Create Your Account</p>
+            <p className="text-xs text-slate-300">Join your team — Smart Teamwork. Clear Tasks. Better Results.</p>
           </div>
         </div>
 
@@ -75,23 +75,23 @@ export default function Register() {
 
         <form onSubmit={onSubmit} className="space-y-4">
           <label className="block">
-            <span className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-muted">Full name</span>
+            <span className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-slate-200">Full name</span>
             <span className="relative block">
-              <User className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+              <User className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-indigo-300" size={16} />
               <input required minLength={2} className="input pl-9" placeholder="Alex Kumar" value={name} onChange={(e) => setName(e.target.value)} />
             </span>
           </label>
           <label className="block">
-            <span className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-muted">Email</span>
+            <span className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-slate-200">Email</span>
             <span className="relative block">
-              <Mail className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+              <Mail className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-indigo-300" size={16} />
               <input required type="email" className="input pl-9" placeholder="you@company.com" value={email} onChange={(e) => setEmail(e.target.value)} />
             </span>
           </label>
           <label className="block">
-            <span className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-muted">Password</span>
+            <span className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-slate-200">Password</span>
             <span className="relative block">
-              <Lock className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+              <Lock className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-indigo-300" size={16} />
               <input
                 required
                 minLength={8}
@@ -101,33 +101,33 @@ export default function Register() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
-              <button type="button" onClick={() => setShowPw((s) => !s)} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-white" aria-label="Toggle password visibility">
+              <button type="button" onClick={() => setShowPw((s) => !s)} className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-300 hover:text-white" aria-label="Toggle password visibility">
                 {showPw ? <EyeOff size={15} /> : <Eye size={15} />}
               </button>
             </span>
           </label>
           <label className="block">
-            <span className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-muted">Confirm password</span>
+            <span className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-slate-200">Confirm password</span>
             <span className="relative block">
-              <Lock className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+              <Lock className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-indigo-300" size={16} />
               <input required minLength={8} type={showPw ? 'text' : 'password'} className="input pl-9" placeholder="Repeat password" value={confirm} onChange={(e) => setConfirm(e.target.value)} />
             </span>
           </label>
 
-          <button type="submit" disabled={busy} className="btn-primary w-full !py-3">
+          <button type="submit" disabled={busy} className="btn-primary w-full !py-3 text-base">
             {busy ? <Spinner /> : null}
             {busy ? 'Creating account…' : 'Create Account'}
           </button>
         </form>
 
-        <p className="mt-4 flex items-start gap-2 rounded-xl border border-white/10 bg-black/20 px-3.5 py-2.5 text-[11px] leading-relaxed text-muted">
-          <Info size={14} className="mt-0.5 shrink-0 text-indigo-300" />
+        <p className="mt-4 flex items-start gap-2.5 rounded-xl border border-indigo-400/25 bg-[#060919]/90 px-3.5 py-2.5 text-[11px] leading-relaxed text-slate-300">
+          <Info size={15} className="mt-0.5 shrink-0 text-indigo-300" />
           New accounts join as Regular Members. Admin and Team Lead roles are assigned by your administrator.
         </p>
 
-        <p className="mt-5 text-center text-sm text-muted">
+        <p className="mt-5 text-center text-sm text-slate-300">
           Already have an account?{' '}
-          <Link to="/login" className="font-bold text-indigo-300 transition hover:text-indigo-200">
+          <Link to="/login" className="font-bold text-indigo-300 transition hover:text-indigo-100 underline underline-offset-4">
             Sign In
           </Link>
         </p>

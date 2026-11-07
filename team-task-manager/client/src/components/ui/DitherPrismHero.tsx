@@ -603,12 +603,12 @@ export function DitherPrismBackground({
         particleCount={particleCount}
         particleColor={particleColor}
       />
-      {/* Subtle radial darkening vignette overlay for card contrast */}
+      {/* Contrast vignette overlay: prevents bright shader hot-spots from washing out form text */}
       <div
         className="absolute inset-0 pointer-events-none"
         style={{
           background:
-            'radial-gradient(ellipse at 50% 50%, rgba(5,7,15,0.15) 0%, rgba(5,7,15,0.72) 100%)',
+            'radial-gradient(ellipse at 50% 50%, rgba(5,7,15,0.45) 0%, rgba(5,7,15,0.82) 100%)',
         }}
       />
     </div>

@@ -62,10 +62,10 @@ export default function Login() {
               <h1 className="font-display text-3xl font-extrabold tracking-wide brand-gradient-text">
                 TEAM TASK MANAGER
               </h1>
-              <p className="text-sm font-medium tracking-wide text-muted">Smart Teamwork. Clear Tasks. Better Results.</p>
+              <p className="text-sm font-medium tracking-wide text-slate-300">Smart Teamwork. Clear Tasks. Better Results.</p>
             </div>
           </div>
-          <p className="mb-8 max-w-md text-base leading-relaxed text-muted">
+          <p className="mb-8 max-w-md text-base leading-relaxed text-slate-300">
             The Ultra-3D productivity platform for modern teams — projects, kanban, analytics and
             collaboration in one futuristic workspace.
           </p>
@@ -75,13 +75,17 @@ export default function Login() {
               { icon: Users2, title: 'Built for teams', text: 'Admins, team leads and members with precise RBAC.' },
               { icon: ShieldCheck, title: 'Enterprise-grade security', text: 'JWT sessions, audit logs, rate limiting.' },
             ].map((f) => (
-              <motion.div key={f.title} whileHover={{ x: 6 }} className="card3d card3d-hover flex items-start gap-4 p-4">
+              <motion.div
+                key={f.title}
+                whileHover={{ x: 6 }}
+                className="flex items-start gap-4 rounded-2xl border border-white/15 bg-[#090d22]/85 p-4 shadow-xl backdrop-blur-xl transition hover:border-indigo-400/40"
+              >
                 <span className="rounded-xl bg-gradient-to-br from-indigo-500 to-violet-600 p-2.5 text-white shadow-glow">
                   <f.icon size={18} />
                 </span>
                 <span>
-                  <span className="block text-sm font-bold">{f.title}</span>
-                  <span className="block text-xs text-muted">{f.text}</span>
+                  <span className="block text-sm font-bold text-white">{f.title}</span>
+                  <span className="block text-xs text-slate-300 mt-0.5">{f.text}</span>
                 </span>
               </motion.div>
             ))}
@@ -93,18 +97,18 @@ export default function Login() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-          className="card3d mx-auto w-full max-w-md !p-8 shadow-glass-lg"
+          className="relative mx-auto w-full max-w-md rounded-2xl border border-white/20 bg-[#090d22]/95 p-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95)] backdrop-blur-2xl"
         >
           <div className="mb-7 flex flex-col items-center gap-3 text-center lg:hidden">
             <Logo size={52} />
             <div>
               <h1 className="font-display text-xl font-extrabold tracking-wide brand-gradient-text">TEAM TASK MANAGER</h1>
-              <p className="text-xs font-medium tracking-wide text-muted">Smart Teamwork. Clear Tasks. Better Results.</p>
+              <p className="text-xs font-medium tracking-wide text-slate-300">Smart Teamwork. Clear Tasks. Better Results.</p>
             </div>
           </div>
 
-          <h2 className="font-display text-2xl font-bold">Welcome back</h2>
-          <p className="mt-1 text-sm text-muted">Sign in to your workspace to continue.</p>
+          <h2 className="font-display text-2xl font-bold text-white">Welcome back</h2>
+          <p className="mt-1 text-sm text-slate-300">Sign in to your workspace to continue.</p>
 
           {error && (
             <motion.p
@@ -118,9 +122,9 @@ export default function Login() {
 
           <form onSubmit={onSubmit} className="mt-6 space-y-4">
             <label className="block">
-              <span className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-muted">Email</span>
+              <span className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-slate-200">Email</span>
               <span className="relative block">
-                <Mail className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-slate-400" size={16} />
+                <Mail className="pointer-events-none absolute left-3 top-1/2 h-4.5 w-4.5 -translate-y-1/2 text-indigo-300" size={16} />
                 <input
                   type="email"
                   required
@@ -134,9 +138,9 @@ export default function Login() {
             </label>
 
             <label className="block">
-              <span className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-muted">Password</span>
+              <span className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-slate-200">Password</span>
               <span className="relative block">
-                <Lock className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+                <Lock className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-indigo-300" size={16} />
                 <input
                   type={showPw ? 'text' : 'password'}
                   required
@@ -149,7 +153,7 @@ export default function Login() {
                 <button
                   type="button"
                   onClick={() => setShowPw((s) => !s)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 transition hover:text-white"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-300 transition hover:text-white"
                   aria-label={showPw ? 'Hide password' : 'Show password'}
                 >
                   {showPw ? <EyeOff size={15} /> : <Eye size={15} />}
@@ -165,9 +169,9 @@ export default function Login() {
                   onChange={(e) => setRemember(e.target.checked)}
                   className="h-4 w-4 rounded accent-indigo-500"
                 />
-                <span className="text-muted">Remember me</span>
+                <span className="text-slate-200 font-medium">Remember me</span>
               </label>
-              <Link to="/forgot-password" className="font-semibold text-indigo-300 transition hover:text-indigo-200">
+              <Link to="/forgot-password" className="font-semibold text-indigo-300 transition hover:text-indigo-100 underline-offset-4 hover:underline">
                 Forgot password?
               </Link>
             </div>
@@ -178,14 +182,14 @@ export default function Login() {
             </button>
           </form>
 
-          <div className="mt-6 rounded-xl border border-white/10 bg-black/20 px-4 py-3 text-xs leading-relaxed text-muted">
-            <span className="font-bold text-slate-300">Demo accounts:</span> admin@example.com / Admin@123 ·{' '}
+          <div className="mt-6 rounded-xl border border-indigo-400/25 bg-[#060919]/90 px-4 py-3 text-xs leading-relaxed text-slate-300">
+            <span className="font-bold text-indigo-300">Demo accounts:</span> admin@example.com / Admin@123 ·{' '}
             john@example.com / John@1234 (Lead) · alex@example.com / Alex@1234 (Member)
           </div>
 
-          <p className="mt-5 text-center text-sm text-muted">
+          <p className="mt-5 text-center text-sm text-slate-300">
             New here?{' '}
-            <Link to="/register" className="font-bold text-indigo-300 transition hover:text-indigo-200">
+            <Link to="/register" className="font-bold text-indigo-300 transition hover:text-indigo-100 underline underline-offset-4">
               Create account
             </Link>
           </p>

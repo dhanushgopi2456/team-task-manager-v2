@@ -120,16 +120,22 @@ body {
   .btn-ghost:hover { background: var(--surface-strong); border-color: rgba(129,140,248,.4); }
 
   .input {
-    @apply w-full rounded-xl px-3.5 py-2.5 text-sm outline-none transition-all duration-200 placeholder:text-slate-400/60;
-    background: color-mix(in srgb, var(--surface-strong) 90%, transparent);
-    border: 1px solid var(--border);
-    color: var(--text);
-    box-shadow: inset 0 2px 6px rgba(2,6,23,.18);
+    @apply w-full rounded-xl px-3.5 py-2.5 text-sm outline-none transition-all duration-200 placeholder:text-slate-400;
+    background: rgba(8, 12, 28, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #f8fafc;
+    box-shadow: inset 0 2px 5px rgba(2,6,23,.4);
   }
-  html.light .input { box-shadow: inset 0 2px 6px rgba(15,23,42,.06); }
+  html.light .input {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(15, 23, 42, 0.16);
+    color: #0f172a;
+    box-shadow: inset 0 2px 6px rgba(15,23,42,.06);
+  }
   .input:focus {
-    border-color: rgba(129,140,248,.65);
-    box-shadow: 0 0 0 3px rgba(99,102,241,.22), inset 0 2px 6px rgba(2,6,23,.18);
+    border-color: rgba(129,140,248,.85);
+    background: rgba(12, 17, 40, 0.98);
+    box-shadow: 0 0 0 3px rgba(99,102,241,.3), inset 0 2px 5px rgba(2,6,23,.4);
   }
 
   .text-muted { color: var(--muted); }

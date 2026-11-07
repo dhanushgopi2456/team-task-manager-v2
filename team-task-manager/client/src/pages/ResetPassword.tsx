@@ -47,28 +47,32 @@ export default function ResetPassword() {
         showParticles={true}
         particleColor="#a5b4fc"
       />
-      <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} className="card3d relative z-10 w-full max-w-md !p-8 shadow-glass-lg">
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        className="relative z-10 mx-auto w-full max-w-md rounded-2xl border border-white/20 bg-[#090d22]/95 p-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95)] backdrop-blur-2xl"
+      >
         <div className="mb-6 flex flex-col items-center gap-3 text-center">
           <Logo size={48} />
           <h1 className="font-display text-xl font-extrabold brand-gradient-text">TEAM TASK MANAGER</h1>
-          <h2 className="font-display text-lg font-bold">Set a new password</h2>
+          <h2 className="font-display text-xl font-bold text-white">Set a new password</h2>
         </div>
 
         {!token && (
-          <p className="mb-4 rounded-xl border border-amber-400/30 bg-amber-500/10 px-3.5 py-2.5 text-sm text-amber-300">
+          <p className="mb-4 rounded-xl border border-amber-400/30 bg-amber-500/10 px-3.5 py-2.5 text-sm font-medium text-amber-300">
             This link is missing its security token. Please request a new reset link.
           </p>
         )}
-        {error && <p className="mb-4 rounded-xl border border-rose-400/30 bg-rose-500/10 px-3.5 py-2.5 text-sm text-rose-300">{error}</p>}
+        {error && <p className="mb-4 rounded-xl border border-rose-400/30 bg-rose-500/10 px-3.5 py-2.5 text-sm font-medium text-rose-300">{error}</p>}
         {success && (
-          <p className="mb-4 rounded-xl border border-emerald-400/30 bg-emerald-500/10 px-3.5 py-2.5 text-sm text-emerald-300">
+          <p className="mb-4 rounded-xl border border-emerald-400/30 bg-emerald-500/10 px-3.5 py-2.5 text-sm font-medium text-emerald-300">
             {success}
           </p>
         )}
 
         <form onSubmit={onSubmit} className="space-y-4">
           <span className="relative block">
-            <Lock className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+            <Lock className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-indigo-300" size={16} />
             <input
               required
               minLength={8}
@@ -81,7 +85,7 @@ export default function ResetPassword() {
             />
           </span>
           <span className="relative block">
-            <Lock className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+            <Lock className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-indigo-300" size={16} />
             <input
               required
               minLength={8}
@@ -93,7 +97,7 @@ export default function ResetPassword() {
               onChange={(e) => setConfirm(e.target.value)}
             />
           </span>
-          <button disabled={busy || !token || !!success} className="btn-primary w-full">
+          <button disabled={busy || !token || !!success} className="btn-primary w-full !py-3 text-base">
             {busy ? (
               <span className="inline-flex items-center justify-center gap-2">
                 <Spinner />
@@ -105,8 +109,8 @@ export default function ResetPassword() {
           </button>
         </form>
 
-        <p className="mt-6 text-center text-sm text-muted">
-          <Link to="/login" className="font-bold text-indigo-300 hover:text-indigo-200">← Back to sign in</Link>
+        <p className="mt-6 text-center text-sm text-slate-300">
+          <Link to="/login" className="font-bold text-indigo-300 transition hover:text-indigo-100 underline underline-offset-4">← Back to sign in</Link>
         </p>
       </motion.div>
     </div>
