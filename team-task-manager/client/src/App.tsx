@@ -6,6 +6,7 @@ import { ToastProvider } from './hooks/useToast';
 import { AppShell } from './components/layout/AppShell';
 import { BrandLoader } from './components/layout/BackgroundFX';
 
+const LandingPage = lazy(() => import('./pages/LandingPage'));
 const Login = lazy(() => import('./pages/Login'));
 const Register = lazy(() => import('./pages/Register'));
 const ForgotPassword = lazy(() => import('./pages/ForgotPassword'));
@@ -61,6 +62,8 @@ export default function App() {
             <Suspense fallback={<BrandLoader label="Loading module…" />}>
             <Routes>
               {/* Public */}
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/landing" element={<LandingPage />} />
               <Route path="/login" element={<PublicOnly><Login /></PublicOnly>} />
               <Route path="/register" element={<PublicOnly><Register /></PublicOnly>} />
               <Route path="/forgot-password" element={<PublicOnly><ForgotPassword /></PublicOnly>} />
